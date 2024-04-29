@@ -1,0 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        //값을 계산할 임시 노드 선언
+        ListNode node = new ListNode(0);
+        //임시 노드를 첫 번째 노드로 선언
+        ListNode root = node;
+        //다음 노드는 첫 번째 노드로 지정
+        node.next = head;
+        //다음 노드와 다음다음 노드가 있으면 반복
+        while (node.next != null && node.next.next != null) {
+            //a는 다음 노드
+            ListNode a = node.next;
+            //b는 다음다음 노드
+            ListNode b = node.next.next;
+            //위치 변경
+            a.next = b.next;
+            node.next = b;
+            node.next.next = a;
+            //두칸 앞으로 이동
+            node = node.next.next;
+        }
+        return root.next;
+
+    }
+}
